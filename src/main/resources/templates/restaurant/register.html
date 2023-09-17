@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Board Register</title>
+</head>
+
+<form action="/restaurant/register" method="post" enctype="multipart/form-data">
+    <div>
+        <span>가게이름</span>
+        <input type="text" name="name" placeholder="가게이름">
+    </div>
+
+    <div>
+        <span>카테고리</span>
+        <select name="categories">
+            <option value="한식">한식</option>
+            <option value="중식">중식</option>
+            <option value="일식">일식</option>
+            <option value="카페">카페</option>
+        </select>
+    </div>
+
+    <div>
+        <span>openingTime</span>
+        <select name="openingTime">
+            <option th:each="number : ${#numbers.sequence(10, 21)}"
+                    th:value="${number}" th:text="${number}"></option>
+        </select>
+    </div>
+
+    <div>
+        <span>closingTime</span>
+        <select name="closingTime">
+            <option th:each="number : ${#numbers.sequence(11, 22)}"
+                    th:value="${number}" th:text="${number}"></option>
+        </select>
+    </div>
+
+    <div>
+        <span>위치</span>
+        <input type="text" name="location" placeholder="location">
+    </div>
+
+    <div>
+        <span>번호</span>
+        <input type="text" name="callNumber" placeholder="callNumber">
+    </div>
+
+    <div>
+        <span>설명</span>
+        <input type="text" name="description" placeholder="description">
+    </div>
+
+
+    <div>
+        <span>메뉴1</span>
+        <input type="text" name="menuName1" placeholder="메뉴 이름을 입력해주세요.">
+        <input type="text" name="menuDesc1" placeholder="메뉴 설명을 입력해주세요.">
+        <input type="file" name="menuImage1"/>
+    </div>
+
+    <div>
+        <span>메뉴2</span>
+        <input type="text" name="menuName2" placeholder="메뉴 이름을 입력해주세요.">
+        <input type="text" name="menuDesc2" placeholder="메뉴 설명을 입력해주세요.">
+        <input type="file" name="menuImage2"/>
+    </div>
+
+    <div>
+        <span>메뉴3</span>
+        <input type="text" name="menuName3" placeholder="메뉴 이름을 입력해주세요.">
+        <input type="text" name="menuDesc3" placeholder="메뉴 설명을 입력해주세요.">
+        <input type="file" name="menuImage3"/>
+    </div>
+
+
+    <div>
+        <div>
+            <button type="submit" class="submitBtn">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
+    </div>
+
+</form>
+
+
+
+</html>
