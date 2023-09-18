@@ -44,12 +44,33 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Override
     public void modify(RestaurantDTO restaurantDTO) {
+        Optional<Restaurant> result = restaurantRepository.findById(restaurantDTO.getId());
+        Restaurant restaurant = result.orElseThrow();
 
-    }
+        restaurant.change(
+                restaurantDTO.getName(),
+                restaurantDTO.getCategories(),
+                restaurantDTO.getOpeningTime(),
+                restaurantDTO.getClosingTime(),
+                restaurantDTO.getCallNumber(),
+                restaurantDTO.getLocation(),
+                restaurantDTO.getDescription(),
+                restaurantDTO.getMenuName1(),
+                restaurantDTO.getMenuName2(),
+                restaurantDTO.getMenuName3(),
+                restaurantDTO.getMenuDesc1(),
+                restaurantDTO.getMenuDesc2(),
+                restaurantDTO.getMenuDesc3(),
+                restaurantDTO.getMenuUrl1(),
+                restaurantDTO.getMenuUrl2(),
+                restaurantDTO.getMenuUrl3()
+        );
+        restaurantRepository.save(restaurant);
+    };
 
     @Override
     public void remove(Long id) {
-
+        restaurantRepository.deleteById(id);
     }
 
     @Override

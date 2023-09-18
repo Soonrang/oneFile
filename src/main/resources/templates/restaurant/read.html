@@ -62,7 +62,7 @@
 
             // 인포윈도우로 장소에 대한 설명을 표시합니다
             var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">[[@{${restaurantDTO.name}}]]</div>'
             });
             infowindow.open(map, marker);
 
@@ -121,6 +121,16 @@
     <img style="height: 300px; width: auto;" th:src="@{/restaurant/image/{id}/{menuNumber}(id=${restaurantDTO.id}, menuNumber=3)}" alt="메뉴 3">
 </div>
 
+<div>
+    <div>
+        <a th:href="|@{/restaurant/list}"| >
+            <button type="button">리스트로가기</button>
+        </a>
+        <a th:href="|@{/restaurant/modify(id=${restaurantDTO.id})}|" >
+            <button type="button" >수정하기</button>
+        </a>
+    </div>
+</div>
 
 </body>
 

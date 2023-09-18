@@ -55,4 +55,29 @@ public class Restaurant {
 
     @CreatedDate
     private LocalDateTime createAt;
+
+    public void change(String name, String categories, String openingTime, String closingTime,
+                       String callNumber, String location, String description,
+                       String menuName1, String menuName2, String menuName3,
+                       String menuDesc1, String menuDesc2, String menuDesc3,
+                       String menuUrl1, String menuUrl2, String menuUrl3) {
+        this.name = name;
+        this.categories = categories;
+        this.openingTime = openingTime;
+        this.closingTime = closingTime;
+        this.callNumber = callNumber;
+        this.location = location;
+        this.description = description;
+        this.menuName1 = menuName1;
+        this.menuName2 = menuName2;
+        this.menuName3 = menuName3;
+        this.menuDesc1 = menuDesc1;
+        this.menuDesc2 = menuDesc2;
+        this.menuDesc3 = menuDesc3;
+        this.menuUrl1 = menuUrl1;
+        this.menuUrl2 = menuUrl2;
+        this.menuUrl3 = menuUrl3;
+    }
+
+
 }

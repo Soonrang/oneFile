@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Restaurant Modify</title>
+</head>
+
+<body>
+<h1>레스토랑 수정</h1>
+
+<form th:action="@{/restaurant/modify}" method="post" enctype="multipart/form-data">
+  <div>
+    <span>가게 이름</span>
+    <input type="text" name="name" th:value="${restaurantDTO.name}" placeholder="가게 이름">
+  </div>
+
+  <div>
+    <span>카테고리</span>
+    <select name="categories" th:value="${restaurantDTO.categories}">
+      <option value="한식">한식</option>
+      <option value="중식">중식</option>
+      <option value="일식">일식</option>
+      <option value="카페">카페</option>
+    </select>
+  </div>
+
+  <div>
+    <span>영업 시작 시간</span>
+    <select name="openingTime" th:value="${restaurantDTO.openingTime}">
+      <option th:each="number : ${#numbers.sequence(10, 21)}"
+              th:value="${number}" th:text="${number}"></option>
+    </select>
+  </div>
+
+  <div>
+    <span>영업 종료 시간</span>
+    <select name="closingTime" th:value="${restaurantDTO.closingTime}">
+      <option th:each="number : ${#numbers.sequence(11, 22)}"
+              th:value="${number}" th:text="${number}"></option>
+    </select>
+  </div>
+
+  <div>
+    <span>위치</span>
+    <input type="text" name="location" th:value="${restaurantDTO.location}" placeholder="위치">
+  </div>
+
+  <div>
+    <span>전화번호</span>
+    <input type="text" name="callNumber" th:value="${restaurantDTO.callNumber}" placeholder="전화번호">
+  </div>
+
+  <div>
+    <span>설명</span>
+    <input type="text" name="description" th:value="${restaurantDTO.description}" placeholder="설명">
+  </div>
+
+  <div>
+    <h2>메뉴1 수정</h2>
+    <input type="text" name="menuName1" th:value="${restaurantDTO.menuName1}" placeholder="메뉴 이름을 입력해주세요.">
+    <input type="text" name="menuDesc1" th:value="${restaurantDTO.menuDesc1}" placeholder="메뉴 설명을 입력해주세요.">
+    <input type="file" name="menuImage1"/>
+  </div>
+
+  <div>
+    <h2>메뉴2 수정</h2>
+    <input type="text" name="menuName2" th:value="${restaurantDTO.menuName2}" placeholder="메뉴 이름을 입력해주세요.">
+    <input type="text" name="menuDesc2" th:value="${restaurantDTO.menuDesc2}" placeholder="메뉴 설명을 입력해주세요.">
+    <input type="file" name="menuImage2"/>
+  </div>
+
+  <div>
+    <h2>메뉴3 수정</h2>
+    <input type="text" name="menuName3" th:value="${restaurantDTO.menuName3}" placeholder="메뉴 이름을 입력해주세요.">
+    <input type="text" name="menuDesc3" th:value="${restaurantDTO.menuDesc3}" placeholder="메뉴 설명을 입력해주세요.">
+    <input type="file" name="menuImage3"/>
+  </div>
+
+  <div>
+    <button type="submit">수정</button>
+    <button type="reset">취소</button>
+  </div>
+</form>
+</body>
+
+</html>

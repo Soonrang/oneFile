@@ -24,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -45,6 +46,80 @@ public class RestaurantController {
     public void registerGET(Model model) {
         model.addAttribute("restaurantDTO", new RestaurantDTO());
     }
+
+//    @PostMapping("/register")
+//    public String registerPost(@Valid RestaurantDTO restaurantDTO,
+//                               BindingResult bindingResult,
+//                               RedirectAttributes redirectAttributes,
+//                               @RequestParam(value = "menuImage1", required = false) Optional<MultipartFile> menuImage1,
+//                               @RequestParam(value = "menuImage2", required = false) Optional<MultipartFile> menuImage2,
+//                               @RequestParam(value = "menuImage3", required = false) Optional<MultipartFile> menuImage3) {
+//
+//        log.info("식당을 등록합니다.");
+//
+//        if (bindingResult.hasErrors()) {
+//            log.info("에러가 있습니다.");
+//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+//            return "redirect:/restaurant/register";
+//        }
+//
+//        // 이미지 파일 저장 경로
+//        String savePath = "C:\\Temp"; // 슬래시로 경로 지정
+//
+//        String[] menuImageFileNames = new String[3];
+//
+//        // 파일 업로드 로직을 반복문으로 처리
+//        for (int i = 0; i < 3; i++) {
+//            Optional<MultipartFile> menuImage = Optional.empty();
+//
+//            switch (i) {
+//                case 0:
+//                    menuImage = menuImage1;
+//                    break;
+//                case 1:
+//                    menuImage = menuImage2;
+//                    break;
+//                case 2:
+//                    menuImage = menuImage3;
+//                    break;
+//            }
+//
+//            if (menuImage.isPresent()) {
+//                menuImageFileNames[i] = UUID.randomUUID().toString() + getFileExtension(menuImage.get().getOriginalFilename());
+//                try {
+//                    saveImage(menuImage.get(), savePath, menuImageFileNames[i]);
+//                } catch (IOException e) {
+//                    log.error("이미지 파일 저장 중 오류 발생: " + e.getMessage());
+//                    // 예외 처리 로직 추가
+//                }
+//            }
+//        }
+//
+//        RestaurantDTO uploadFile = RestaurantDTO.builder()
+//                .name(restaurantDTO.getName())
+//                .categories(restaurantDTO.getCategories())
+//                .callNumber(restaurantDTO.getCallNumber())
+//                .location(restaurantDTO.getLocation())
+//                .openingTime(restaurantDTO.getOpeningTime())
+//                .closingTime(restaurantDTO.getClosingTime())
+//                .description(restaurantDTO.getDescription())
+//                .menuName1(restaurantDTO.getMenuName1())
+//                .menuName2(restaurantDTO.getMenuName2())
+//                .menuName3(restaurantDTO.getMenuName3())
+//                .menuDesc1(restaurantDTO.getMenuDesc1())
+//                .menuDesc2(restaurantDTO.getMenuDesc2())
+//                .menuDesc3(restaurantDTO.getMenuDesc3())
+//                .menuUrl1(menuImageFileNames[0] != null ? savePath + "\\" + menuImageFileNames[0] : null)
+//                .menuUrl2(menuImageFileNames[1] != null ? savePath + "\\" + menuImageFileNames[1] : null)
+//                .menuUrl3(menuImageFileNames[2] != null ? savePath + "\\" + menuImageFileNames[2] : null)
+//                .build();
+//
+//        Long id = restaurantService.register(uploadFile);
+//
+//        redirectAttributes.addFlashAttribute("result", id);
+//
+//        return "redirect:/restaurant/list";
+//    }
 
     @PostMapping("/register")
     public String registerPost(@Valid RestaurantDTO restaurantDTO,
@@ -113,76 +188,7 @@ public class RestaurantController {
         }
     }
 
-
-//    @PostMapping("/register")
-//    public String registerPost(@Valid RestaurantDTO restaurantDTO,
-//                               BindingResult bindingResult,
-//                               RedirectAttributes redirectAttributes,
-//                               @RequestParam("menuImage1") MultipartFile menuImage1,
-//                               @RequestParam("menuImage2") MultipartFile menuImage2,
-//                               @RequestParam("menuImage3") MultipartFile menuImage3) {
-//
-//        log.info("식당을 등록합니다.");
-//
-//        if (bindingResult.hasErrors()) {
-//            log.info("에러가 있습니다.");
-//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-//            return "redirect:/restaurant/register";
-//        }
-//
-//        // 이미지 파일 저장 경로
-//        String savePath = "C:\\Temp";
-//
-//        // 각 이미지 파일의 고유한 파일 이름 생성
-//        String menuImageFileName1 = UUID.randomUUID().toString() + getFileExtension(menuImage1.getOriginalFilename());
-//        String menuImageFileName2 = UUID.randomUUID().toString() + getFileExtension(menuImage2.getOriginalFilename());
-//        String menuImageFileName3 = UUID.randomUUID().toString() + getFileExtension(menuImage3.getOriginalFilename());
-//
-//        // 이미지 파일 저장 경로에 파일 저장
-//        try {
-//            saveImage(menuImage1, savePath, menuImageFileName1);
-//            saveImage(menuImage2, savePath, menuImageFileName2);
-//            saveImage(menuImage3, savePath, menuImageFileName3);
-//        } catch (IOException e) {
-//            log.error("이미지 파일 저장 중 오류 발생: " + e.getMessage());
-//            // 예외 처리 로직 추가
-//        }
-//
-//        RestaurantDTO uploadFile = RestaurantDTO.builder()
-//                .name(restaurantDTO.getName())
-//                .categories(restaurantDTO.getCategories())
-//                .callNumber(restaurantDTO.getCallNumber())
-//                .location(restaurantDTO.getLocation())
-//                .openingTime(restaurantDTO.getOpeningTime())
-//                .closingTime(restaurantDTO.getClosingTime())
-//                .description(restaurantDTO.getDescription())
-//                .menuName1(restaurantDTO.getMenuName1())
-//                .menuName2(restaurantDTO.getMenuName2())
-//                .menuName3(restaurantDTO.getMenuName3())
-//                .menuDesc1(restaurantDTO.getMenuDesc1())
-//                .menuDesc2(restaurantDTO.getMenuDesc2())
-//                .menuDesc3(restaurantDTO.getMenuDesc3())
-//                .menuUrl1(savePath + menuImageFileName1)
-//                .menuUrl2(savePath + menuImageFileName2)
-//                .menuUrl3(savePath + menuImageFileName3)
-//                .build();
-//
-//        Long id = restaurantService.register(uploadFile);
-//
-//        redirectAttributes.addFlashAttribute("result", id);
-//
-//        return "redirect:/restaurant/list";
-//    }
-//
-//    private void saveImage(MultipartFile file, String savePath, String fileName) throws IOException {
-//        Path path = Paths.get(savePath + fileName);
-//        try (InputStream inputStream = file.getInputStream()) {
-//            Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
-//        }
-//    }
-
-
-    @GetMapping("/read")
+    @GetMapping({"/read","/modify"})
     public String read(@RequestParam Long id, Model model) {
         RestaurantDTO restaurantDTO = restaurantService.readOne(id);
         model.addAttribute("restaurantDTO", restaurantDTO);
@@ -221,13 +227,39 @@ public class RestaurantController {
         }
     }
 
-
-
     private String getFileExtension(String fileName) {
         int dotIndex = fileName.lastIndexOf('.');
         if (dotIndex >= 0 && dotIndex < fileName.length() - 1) {
             return fileName.substring(dotIndex);
         }
         return "";
+    }
+
+    @PostMapping("/modify")
+    public String modify(@Valid RestaurantDTO restaurantDTO,
+                         BindingResult bindingResult,
+                         PageRequestDTO pageRequestDTO,
+                         RedirectAttributes redirectAttributes){
+        if(bindingResult.hasErrors()) {
+            log.info("has error");
+            String link = pageRequestDTO.getLink();
+            redirectAttributes.addFlashAttribute("error", bindingResult.getAllErrors());
+            redirectAttributes.addAttribute("id", restaurantDTO.getId());
+            return "redirect:/restaurant/modify?"+link;
+        }
+
+        restaurantService.modify(restaurantDTO);
+        redirectAttributes.addFlashAttribute("result","modified");
+        redirectAttributes.addFlashAttribute("id", restaurantDTO.getId());
+        return "redirect:/restaurant/modify?id=" + restaurantDTO.getId();
+
+    }
+
+    @PostMapping("/remove")
+    public String remove(Long id, RedirectAttributes redirectAttributes){
+        restaurantService.remove(id);
+
+        redirectAttributes.addFlashAttribute("result","removed");
+        return "redirect:/restaurant/list";
     }
 }
